@@ -1,0 +1,63 @@
+<div class="heading1" >
+  <div class="subhead1">
+    <div class="calender">
+      <form class="form-inline">
+        <div class="form-group">
+          <label>Select Next session date</label>
+          <div class="input-group">
+            <input class="form-control" #dateval placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button">
+                    <img src="/assets/date_picker.png" length="20px" width="20px" alt="image">
+                </button>
+                <button class="buttonhover" ngbDropdownItem (click)="getDate(dateval.value)"> Submit</button>
+              </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    
+  </div>
+  <div class="subhead2">
+    <div class="row">
+      <div class="col">
+        <div ngbDropdown class="d-inline-block">
+          <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle (click)="getDataFromAPI()">Select Child Subject</button>
+            <div class="subbutton" ngbDropdownMenu aria-labelledby="dropdownBasic1" style="width: 320px;height: 300px;overflow: scroll;">
+              <ul *ngFor="let d of data">
+                <button ngbDropdownItem #box (click)="getCourse(d['Child Subject'])"> {{d["Child Subject"]}}</button>
+              </ul>
+            </div>
+        </div>
+      </div>
+    </div> 
+  </div>
+  <div class="subhead3">
+    <div class="search">
+      <input type="text" #search placeholder="search your course">
+    </div>
+      <div class="subbutton">
+        <button class="buttonhover" (click)="getCourse(search.value)"> Search</button>
+    </div>
+  </div>
+</div>
+
+<div class="heading2">
+  <div class="result">
+    <div class="rectanglebox">
+     <label>Course Id -</label>{{courseId}}<br>
+     <label>Course Name -</label>{{Course_Name}}<br>
+     <label>Course Provider -</label>{{Provider}}<br>
+     <label>Course Url -</label>{{CourseUrl}}
+    </div>
+    <div class="rectanglebox">
+      
+      <p>Course Count</p>
+      <p>{{msg}}</p>{{count}}
+  </div>
+
+</div>
+
+  
+
+   
