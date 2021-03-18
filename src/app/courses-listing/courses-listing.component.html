@@ -26,8 +26,8 @@
         <div ngbDropdown class="d-inline-block">
           <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle (click)="getDataFromAPI()"><label class="datecss">Select Child Subject</label></button>
             <div class="subbutton" ngbDropdownMenu aria-labelledby="dropdownBasic1" style="width: 320px;height: 300px;overflow: scroll;">
-              <ul *ngFor="let d of data">
-                <button ngbDropdownItem #box (click)="getCourse(d['Child Subject'])"> {{d["Child Subject"]}}</button>
+              <ul *ngFor="let d of final_array3">
+                <button ngbDropdownItem #box (click)="getCourse(d)"> {{d}}</button>
               </ul>
             </div>
         </div>
@@ -38,8 +38,8 @@
     <div ngbDropdown class="d-inline-block">
       <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle (click)="getproviderFromAPI()"><label class="datecss">Select Provider</label></button>
         <div class="subbutton" ngbDropdownMenu aria-labelledby="dropdownBasic1" style="width: 320px;height: 300px;overflow: scroll;">
-          <ul *ngFor="let d of data">
-            <button ngbDropdownItem #box (click)="getprovider(d['Provider'])"> {{d["Provider"]}}</button>
+          <ul *ngFor="let d of provider_final3">
+            <button ngbDropdownItem #box (click)="getprovider(d)"> {{d}}</button>
           </ul>
         </div>
     </div>
@@ -56,14 +56,15 @@
      <label class="courseid">Course Id - </label>{{courseId}}<br>
      <label class="courseid">Course Name - </label>{{Course_Name}}<br>
      <label class="courseid">Course Provider - </label>{{Provider}}<br>
-     <label class="courseid">Course Url - </label>{{CourseUrl}}
+     <label class="courseid">Course Url - </label>{{CourseUrl}}<br>
+     <label class="courseid">Child Subject - </label>{{Course_child}}
     </div>
     <div class="rectanglebox">
       
       <h1>Course Count</h1> 
       <p>{{count}}</p>
       <!-- <h3>Total Number of Courses</h3> -->
-      <h3>Subject :{{msg}}</h3>
+      <label class="courseid">Subject :</label>{{msg}}
      
   </div>
  

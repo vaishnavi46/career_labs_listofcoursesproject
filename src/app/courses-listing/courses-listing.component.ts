@@ -18,12 +18,15 @@ export class CoursesListingComponent implements OnInit {
   courseId:number;
   Course_Name:string;
   Provider:string;
+  Course_child:string;
   provider_final:any=[];
   provider_final2:any=[];
+  provider_final3:any=[];
   sub_array:any=[];
   sub_array2:any=[];
   final_array:any=[];
   final_array2:any=[];
+  final_array3:any=[];
   CourseUrl: string;
   constructor(private Jsonplaceholder:JsonplaceholderService ) { 
     this.data=new Array<any>()
@@ -33,13 +36,7 @@ export class CoursesListingComponent implements OnInit {
   getDataFromAPI()
   {
     this.Jsonplaceholder.getData().subscribe((data)=>{
-      // console.log(data)
       this.data=data
-      // for(let d of data)
-      // {
-      //   this.data=d['Course Name'].length;
-      // }
-      console.log(this.data);
       for(let i=0;i<data.length;i++)    
       {
         this.sub_array[i]=this.data[i]['Child Subject'];
@@ -54,17 +51,20 @@ export class CoursesListingComponent implements OnInit {
           }
         }
         if(this.final_array[i]!=this.sub_array[i])
-        {
-          if(this.sub_array[i]!="")
-          {
+        { 
             this.final_array2[i]=this.sub_array[i];          
-          }
         }
       }
-      // for(let i=0;i<this.final_array2.length;i++)
-      // {
-      //   console.log(this.final_array2[i]);
-      // }
+      let index=0;
+      for(let i=0;i<this.final_array2.length;i++)
+      {
+        if(this.final_array2[i]!=undefined)
+        {
+          this.final_array3[index]=this.final_array2[i];
+          index++;
+        }
+      }
+      
     })
   }
   getproviderFromAPI()
@@ -90,17 +90,22 @@ export class CoursesListingComponent implements OnInit {
             this.provider_final2[i]=this.sub_array2[i];          
         }
       }
-      // for(let i=0;i<this.provider_final2.length;i++)
-      // {
-      //   console.log(this.provider_final2[i]);
-      // }
+      
+      let index=0;
+      for(let i=0;i<this.provider_final2.length;i++)
+      {
+        //console.log(this.final_array2[i]);
+        if(this.provider_final2[i]!=undefined)
+        {
+          this.provider_final3[index]=this.provider_final2[i];
+          index++;
+        }
+      }
     })
   }
 
   getprovider(value:string){
-    // this.msg=value;
     this.count=0;
-    // console.log(value);
     for(let d of this.data)
     {
       if(value==d['Provider'])
@@ -113,17 +118,12 @@ export class CoursesListingComponent implements OnInit {
   getCourse(value:string){
     this.msg=value;
     this.count=0;
-    // console.log(value);
     for(let d of this.data)
     {
       if(value==d['Child Subject'])
       {
         this.count+=1;
       }
-      // if(value==d['Provider'])
-      // {
-      //   this.count+=1;
-      // }
     }
   }
 
@@ -135,17 +135,15 @@ export class CoursesListingComponent implements OnInit {
     this.msg1=value;
     for(let d of this.data)
     {
-      //console.log(d['Next Session Date']);
       if(value==d['Next Session Date'])
       {
-        // console.log(d);
         this.courseId=d['Course Id'];
         this.Course_Name=d['Course Name'];
         this.Provider=d['Provider'];
         this.CourseUrl=d['Url'];
+        this.Course_child=d['Child Subject'];
       }
     }
-    // console.log(this.msg1);
   }
   ngOnInit(): void {
   }
