@@ -12,27 +12,38 @@ import {NgbAlertConfig,NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 export class CoursesListingComponent implements OnInit {
   model:NgbDateStruct;
   data:Array<any>;
-  msg:String;
-  msg1:string;
-  count:number=0;
+  usermessage:string;
+  date_msg:string;
+  total_coursecount:number;
+  providerName:string;
+  course_count:number=0;
+  ProviderCount:number=0;
   courseId:number;
   Course_Name:string;
   Provider:string;
   Course_child:string;
-  provider_final:any=[];
-  provider_final2:any=[];
-  provider_final3:any=[];
+  CourseUrl: string;
+  provider_final_removeduplicate:any=[];
+  provider_final_removeduplicate2:any=[];
+  provider_final_removeduplicate3:any=[];
   sub_array:any=[];
   sub_array2:any=[];
-  final_array:any=[];
-  final_array2:any=[];
-  final_array3:any=[];
-  CourseUrl: string;
+  child_final_removeduplicates:any=[];
+  child_final_removeduplicates2:any=[];
+  child_final_removeduplicates3:any=[];
   constructor(private Jsonplaceholder:JsonplaceholderService ) { 
     this.data=new Array<any>()
     
   }
 
+  //this function is to count the total number of courses in json
+  gettotalcoursecount()
+  {
+    this.Jsonplaceholder.getData().subscribe((data)=>{
+      this.total_coursecount=data.length;
+    })
+  }
+  //this function filters the child subject removes all the duplicates
   getDataFromAPI()
   {
     this.Jsonplaceholder.getData().subscribe((data)=>{
@@ -47,26 +58,28 @@ export class CoursesListingComponent implements OnInit {
         {
           if(this.sub_array[i]==this.sub_array[j])
           {
-            this.final_array[i]=this.sub_array[j];
+            this.child_final_removeduplicates[i]=this.sub_array[j];
           }
         }
-        if(this.final_array[i]!=this.sub_array[i])
+        if(this.child_final_removeduplicates[i]!=this.sub_array[i])
         { 
-            this.final_array2[i]=this.sub_array[i];          
+            this.child_final_removeduplicates2[i]=this.sub_array[i];          
         }
       }
       let index=0;
-      for(let i=0;i<this.final_array2.length;i++)
+      for(let i=0;i<this.child_final_removeduplicates2.length;i++)
       {
-        if(this.final_array2[i]!=undefined)
+        if(this.child_final_removeduplicates2[i]!=undefined)
         {
-          this.final_array3[index]=this.final_array2[i];
+          this.child_final_removeduplicates3[index]=this.child_final_removeduplicates2[i];
           index++;
         }
       }
       
     })
   }
+   
+  //this function filters the provider removes all the duplicates
   getproviderFromAPI()
   {
     this.Jsonplaceholder.getData().subscribe((data)=>{
@@ -82,57 +95,59 @@ export class CoursesListingComponent implements OnInit {
         {
           if(this.sub_array2[i]==this.sub_array2[j])
           {
-            this.provider_final[i]=this.sub_array2[j];
+            this.provider_final_removeduplicate[i]=this.sub_array2[j];
           }
         }
-        if(this.provider_final[i]!=this.sub_array2[i])
+        if(this.provider_final_removeduplicate[i]!=this.sub_array2[i])
         {
-            this.provider_final2[i]=this.sub_array2[i];          
+            this.provider_final_removeduplicate2[i]=this.sub_array2[i];          
         }
       }
-      
       let index=0;
-      for(let i=0;i<this.provider_final2.length;i++)
+      for(let i=0;i<this.provider_final_removeduplicate2.length;i++)
       {
-        //console.log(this.final_array2[i]);
-        if(this.provider_final2[i]!=undefined)
+        if(this.provider_final_removeduplicate2[i]!=undefined)
         {
-          this.provider_final3[index]=this.provider_final2[i];
+          this.provider_final_removeduplicate3[index]=this.provider_final_removeduplicate2[i];
           index++;
         }
       }
     })
   }
 
+  //course count based on user select the provider
   getprovider(value:string){
-    this.count=0;
+    this.ProviderCount=0;
+    this.providerName=value;
     for(let d of this.data)
     {
       if(value==d['Provider'])
       {
-        this.count+=1;
+        this.ProviderCount+=1;
       }
     }
   }
 
+  //course count based on child subject
   getCourse(value:string){
-    this.msg=value;
-    this.count=0;
+    this.usermessage=value;
+    this.course_count=0;
     for(let d of this.data)
     {
       if(value==d['Child Subject'])
       {
-        this.count+=1;
+        this.course_count+=1;
       }
     }
   }
 
+  //list of course based on the next session date
   getDate(value:any)
   {
     this.Jsonplaceholder.getData().subscribe((data)=>{
       this.data=data
     })
-    this.msg1=value;
+    this.date_msg=value;
     for(let d of this.data)
     {
       if(value==d['Next Session Date'])
@@ -146,6 +161,8 @@ export class CoursesListingComponent implements OnInit {
     }
   }
   ngOnInit(): void {
+    this.gettotalcoursecount();
+
   }
 
 }

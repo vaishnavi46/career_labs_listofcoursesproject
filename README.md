@@ -4,11 +4,11 @@ This project is deployed in github link using ng deploy base-href given by githu
 # functionality
 This web page contains three set of dropdown options either we can select next session date or to select the child process or select the provider.Each drop down contains set of date and courses,In the other division based on the user search the  number of courses will be display and total number of courses based on user search will be display as a count value.
 
-when we select the next session date all the list of courses will get displayed including course id ,url,name and provider.These are the major requirement.I completed all functionality in a single page,I didnt redirect to any page since the requirement given can be executed in a single component so i didnt create the other one.
+when we select the next session date all the list of courses will get displayed including course id ,url,name and provider.when the child subject is selected the course count will display based on the user selection,same follows in the provider part.These are the major requirement.I completed all functionality in a single page,I didnt redirect to any page since the requirement given can be executed in a single component so i didnt create the other one.The total course count displayed initially
 
 For fetching the json file from the server i created a service file  and include a https link to access the json file.
 
-In the courses-listing ts file I wrote a array manipulation login to filter the repeated number of courses and provider in the UI/UX i have displayed the list without the duplicate values
+In the courses-listing.ts file I wrote a array manipulation login to filter the repeated number of courses and provider in the UI/UX i have displayed the list without the duplicate values
 
 
 # ListofCourses

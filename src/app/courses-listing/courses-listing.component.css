@@ -2,6 +2,16 @@ h1{
 font-size: 30px;
 color:rgb(227, 245, 160);
 }
+.totalcount
+{
+    text-align: center;
+    border: 2px solid black;
+}
+h2
+{
+    font-size: 30px;
+    color: rgb(179, 179, 248);
+}
 h3{
     font-size: 25px;
     font-weight: bold;

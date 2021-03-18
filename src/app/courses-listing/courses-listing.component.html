@@ -26,7 +26,7 @@
         <div ngbDropdown class="d-inline-block">
           <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle (click)="getDataFromAPI()"><label class="datecss">Select Child Subject</label></button>
             <div class="subbutton" ngbDropdownMenu aria-labelledby="dropdownBasic1" style="width: 320px;height: 300px;overflow: scroll;">
-              <ul *ngFor="let d of final_array3">
+              <ul *ngFor="let d of child_final_removeduplicates3">
                 <button ngbDropdownItem #box (click)="getCourse(d)"> {{d}}</button>
               </ul>
             </div>
@@ -38,18 +38,18 @@
     <div ngbDropdown class="d-inline-block">
       <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle (click)="getproviderFromAPI()"><label class="datecss">Select Provider</label></button>
         <div class="subbutton" ngbDropdownMenu aria-labelledby="dropdownBasic1" style="width: 320px;height: 300px;overflow: scroll;">
-          <ul *ngFor="let d of provider_final3">
+          <ul *ngFor="let d of provider_final_removeduplicate3">
             <button ngbDropdownItem #box (click)="getprovider(d)"> {{d}}</button>
           </ul>
         </div>
     </div>
-    
-      
-        <!-- <button class="buttonhover" (click)="getCourse(search.value)"> Search</button> -->
-    
+        
   </div>
 </div>
-
+<div class="totalcount">
+  <h2>Total Number of courses available</h2>
+  <p>{{total_coursecount}}</p>
+</div>
 <div class="heading2">
   <div class="result">
     <div class="rectanglebox">
@@ -59,14 +59,16 @@
      <label class="courseid">Course Url - </label>{{CourseUrl}}<br>
      <label class="courseid">Child Subject - </label>{{Course_child}}
     </div>
-    <div class="rectanglebox">
-      
-      <h1>Course Count</h1> 
-      <p>{{count}}</p>
-      <!-- <h3>Total Number of Courses</h3> -->
-      <label class="courseid">Subject :</label>{{msg}}
-     
-  </div>
+    <div class="rectanglebox"> 
+      <h1>Total Courses found based on user</h1> 
+      <p>{{course_count}}</p>
+      <label class="courseid">Subject :</label>{{usermessage}}
+    </div>
+    <div class="rectanglebox"> 
+      <h1>Total Courses found based on user</h1> 
+      <p>{{ProviderCount}}</p>
+      <label class="courseid">ProviderName :</label>{{providerName}}
+    </div>
  
 </div>
 
